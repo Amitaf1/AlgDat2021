@@ -1,3 +1,5 @@
+package exercises.week1;
+
 /**
  * Windows: [alt] + [enter] mens du holder på klassen for å lage tester
  * Mac: [option] + [enter] --"--

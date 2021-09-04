@@ -1,3 +1,5 @@
+package exercises.week2;
+
 public class Counting {
 
     public static void main(String[] args) {

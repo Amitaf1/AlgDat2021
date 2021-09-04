@@ -1,3 +1,5 @@
+package exercises.week2;
+
 import java.util.Arrays;
 
 public class BubbleSort {

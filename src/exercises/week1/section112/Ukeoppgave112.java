@@ -1,3 +1,5 @@
+package exercises.week1.section112;
+
 public class Ukeoppgave112 {
 
     public static void main(String[] args) {
