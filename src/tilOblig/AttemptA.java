@@ -1,6 +1,5 @@
 package tilOblig;
 
-import java.util.NoSuchElementException
 
 public class AttemptA {
     public static void main(String[] args) {
