@@ -11,6 +11,7 @@ public class AttemptA {
 
         System.out.println(a);
 
+
     }
 
     public static void rotasjon(char[] a) {
