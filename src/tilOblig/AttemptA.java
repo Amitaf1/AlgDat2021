@@ -16,6 +16,7 @@ public class AttemptA {
 
         System.out.println(Arrays.toString(a));
 
+
     }
 
     public static void rotasjon(char[] a, int k) {
