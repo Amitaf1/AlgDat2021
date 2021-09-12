@@ -6,19 +6,32 @@ public class AttemptA {
     public static void main(String[] args) {
         char[] a = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
 
-        System.out.println(Arrays.toString(a));
-
-        rotasjon(a, 3);
+        int iterate = 1;
 
         System.out.println(Arrays.toString(a));
 
-        rotasjon(a, -2);
+        rotasjon(a, 3, iterate);
+
+        iterate += 1;
+
+        System.out.println(Arrays.toString(a));
+
+        rotasjon(a, -2, iterate);
 
         System.out.println(Arrays.toString(a));
 
     }
 
-    public static void rotasjon(char[] a, int k) {
+    public static void rotasjon(char[] a, int k, int iterate) {
+        
+
+        /*
+        char l = check.charAt(1);
+        char h = check.charAt(check.length() - 2);
+        int lInt = l;
+        int hInt = h;
+        */
+
 
         /*
         Koden inni denne for-loopen gjentar koden inni seg en gang for hver av bokstavene i "a"-arrayen
@@ -29,7 +42,13 @@ public class AttemptA {
          */
         for (int i = 0; i < a.length; i++) {
 
-            // Denne sjekker om lengden av arrayen "a" er mindre enn hvor mange enheter hver bokstav skal forflytte seg. Om lengden til "a" er mindre en dette tallet, så vil ikke resten av for-loopen kjøre
+            iterate += 0;
+
+            String check = Arrays.toString(a);
+
+
+            // Denne sjekker om lengden av arrayen "a" er mindre enn hvor mange enheter hver bokstav skal forflytte seg
+            // Om lengden til "a" er mindre en dette tallet, så vil ikke resten av for-loopen kjøre
             if (a.length <= k || a.length <= -k) {
 
                 // "break;" gjør at, i stedet for at neste del av koden utenfor "if"-blokken kjører, så vil det gjøre at hele for-loopen blir ferdig
@@ -43,6 +62,9 @@ public class AttemptA {
                 // Denne skifter den første elementet i "a"-arrayen (fordi "k" skal være større enn 0 for at koden her skal kjøre) til den siste elementet i "a"-arrayen, dette skifter - i denne tilfellen - den første elementet i "a"-arrayen fra 'A' til 'I'
                 a[i] = a[a.length - k + i];
 
+
+                // checkUnicode(a, i, l, h, lInt, hInt);
+
                 // "continue;" gjør at, i stedet for at neste del av koden utenfor "if"-blokken kjører, så vil det gjøre at for-loopen tror den er ferdig, og kjører igjen
                 continue;
             }
@@ -53,7 +75,10 @@ public class AttemptA {
 
                 // Denne skifter den de siste elementene i "a"-arrayen (fordi "k" skal være mindre enn 0 for at koden her skal kjøre) til dee første elementet i "a"-arrayen
                 // Et eksempel: {}
-                a[i] -= a.length + k;
+                a[i] = a[a.length - k - i];
+
+
+                // checkUnicode(a, i, l, h, lInt, hInt);
 
                 // "continue;" gjør at, i stedet for at neste del av koden utenfor "if"-blokken kjører, så vil det gjøre at for-loopen tror den er ferdig, og kjører igjen
                 continue;
@@ -62,9 +87,17 @@ public class AttemptA {
 
             // "a[i] -= 1" gjør at elementet med indeksen "i" i arrayen "a" blir til elementet med én lavere indeks enn den.
             // Et eksempel: {'A', 'B', 'C', 'D'} --> {'A', 'A', 'C', 'D'} --> {'A', 'A', 'B', 'D'} --> ...
-            a[i] -= k;
+            a[i] = a[i + k];
         }
 
     }
 
+    /*public static void checkUnicode(char[] a, int i, char l, char h, int li, int hi) {
+        if (li < 65) {
+            a[0] = (char) (90 - (65 - li));
+        }
+        else if (h > 90){
+            a[0] = (char) (65 + (hi - 90));
+        }
+    }*/
 }
