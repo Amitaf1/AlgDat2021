@@ -23,81 +23,52 @@ public class AttemptA {
     }
 
     public static void rotasjon(char[] a, int k, int iterate) {
+
+        if (a.length <= k || a.length <= -k) {
+            break;
+        }
+
+        char[] savedElements = new char[5];
+
+        for (int j = 0; j < Math.abs(k); j++) {
+            if (k > 0) {
+                savedElements[j] = a[a.length - k + j];
+            }
+            else if (k < 0) {
+                savedElements[j] = a[j];
+            }
+        }
+
+        System.out.println(savedElements);
+
+        String aDebug = Arrays.toString(a);
+
+
+        if (k > 0) {
+            for (int i = 0; i < a.length; i++) {
+                a[i] = a[i + k];
+            }
+
+            
+        }
+
         
-
-        /*
-        char l = check.charAt(1);
-        char h = check.charAt(check.length() - 2);
-        int lInt = l;
-        int hInt = h;
-        */
-
-
-        /*
-        Koden inni denne for-loopen gjentar koden inni seg en gang for hver av bokstavene i "a"-arrayen
-
-        "int i = 0" lager en variabel "int", før loopen lages. Den starter på 0, fordi i kode, så telles alt fra 0, og ikke 1
-        "i < a.length" sier at koden skal fortsette mens "i" er mindre enn "a.length" ("a.length" er lengden til arrayen "a"), og koden inni loopen skal ikke kjøre om "i" blir like stor, eller større enn "a.length"
-        "i++" sier at variabelen "i", skal øke med 1 hver gang koden inne i loopen utføres
-         */
-        for (int i = 0; i < a.length; i++) {
-
-            iterate += 0;
-
-            String check = Arrays.toString(a);
-
-
-            // Denne sjekker om lengden av arrayen "a" er mindre enn hvor mange enheter hver bokstav skal forflytte seg
-            // Om lengden til "a" er mindre en dette tallet, så vil ikke resten av for-loopen kjøre
-            if (a.length <= k || a.length <= -k) {
-
-                // "break;" gjør at, i stedet for at neste del av koden utenfor "if"-blokken kjører, så vil det gjøre at hele for-loopen blir ferdig
-                break;
+        if (k < 0) {
+            for (int j = a.length - 1; j > 0; j--) {
+                a[j] = a[j + k];
             }
 
-            // Denne delen skal bare utføres om "k" er større enn 0 (f.eks: 1, 2, ...)
-            // Den skal også bare utføres mens "i" er mindre enn "k"
-            if (k > 0 && i < k) {
-
-                // Denne skifter den første elementet i "a"-arrayen (fordi "k" skal være større enn 0 for at koden her skal kjøre) til den siste elementet i "a"-arrayen, dette skifter - i denne tilfellen - den første elementet i "a"-arrayen fra 'A' til 'I'
-                a[i] = a[a.length - k + i];
+        }
 
 
-                // checkUnicode(a, i, l, h, lInt, hInt);
-
-                // "continue;" gjør at, i stedet for at neste del av koden utenfor "if"-blokken kjører, så vil det gjøre at for-loopen tror den er ferdig, og kjører igjen
-                continue;
+        for (int q = 0; q < Math.abs(k); q++) {
+            if (k < 0) {
+                a[q] = savedElements[a.length - k + q];
+            } else if (k > 0) {
+                a[q] = savedElements[q];;
             }
-
-            // Denne delen skal bare utføres om "k" er mindre enn 0 (f.eks: -1, -2, ...)
-            // Den skal også bare utføres mens "i" er stor nok for at de siste elementene som skal byttes ut (de siste to elementene i arrayen om "k" er -2), skal byttes ut fra den andre siden
-            if (k < 0 && i > a.length + k - 1) {
-
-                // Denne skifter den de siste elementene i "a"-arrayen (fordi "k" skal være mindre enn 0 for at koden her skal kjøre) til dee første elementet i "a"-arrayen
-                // Et eksempel: {}
-                a[i] = a[a.length - k - i];
-
-
-                // checkUnicode(a, i, l, h, lInt, hInt);
-
-                // "continue;" gjør at, i stedet for at neste del av koden utenfor "if"-blokken kjører, så vil det gjøre at for-loopen tror den er ferdig, og kjører igjen
-                continue;
-            }
-
-
-            // "a[i] -= 1" gjør at elementet med indeksen "i" i arrayen "a" blir til elementet med én lavere indeks enn den.
-            // Et eksempel: {'A', 'B', 'C', 'D'} --> {'A', 'A', 'C', 'D'} --> {'A', 'A', 'B', 'D'} --> ...
-            a[i] = a[i + k];
         }
 
     }
 
-    /*public static void checkUnicode(char[] a, int i, char l, char h, int li, int hi) {
-        if (li < 65) {
-            a[0] = (char) (90 - (65 - li));
-        }
-        else if (h > 90){
-            a[0] = (char) (65 + (hi - 90));
-        }
-    }*/
 }
