@@ -64,7 +64,7 @@ public class AttemptA {
             }
 
             for (int iLast = 0; iLast < Math.abs(k); iLast++) {
-                a[a.length + k] = savedElements[iLast];
+                a[a.length + iLast + k] = savedElements[iLast];
             }
 
         }
