@@ -25,17 +25,17 @@ public class AttemptA {
     public static void rotasjon(char[] a, int k, int iterate) {
 
         if (a.length <= k || a.length <= -k) {
-            break;
+            return;
         }
 
         char[] savedElements = new char[5];
 
-        for (int j = 0; j < Math.abs(k); j++) {
+        for (int i = 0; i < Math.abs(k); i++) {
             if (k > 0) {
-                savedElements[j] = a[a.length - k + j];
+                savedElements[i] = a[a.length - k + i];
             }
             else if (k < 0) {
-                savedElements[j] = a[j];
+                savedElements[i] = a[i];
             }
         }
 
@@ -45,8 +45,12 @@ public class AttemptA {
 
 
         if (k > 0) {
-            for (int i = 0; i < a.length; i++) {
-                a[i] = a[i + k];
+            for (int iFirst = a.length - 1; iFirst >= k; iFirst--) {
+                a[iFirst] = a[iFirst - k];
+            }
+
+            for (int iLast = 0; iLast < Math.abs(k); iLast++) {
+                a[iLast] = savedElements[iLast];
             }
 
             
@@ -54,19 +58,15 @@ public class AttemptA {
 
         
         if (k < 0) {
-            for (int j = a.length - 1; j > 0; j--) {
-                a[j] = a[j + k];
+            for (int iFirst = 0; iFirst < a.length + k; iFirst++) {
+                a[iFirst] = a[iFirst - k];
+                aDebug = Arrays.toString(a);
             }
 
-        }
-
-
-        for (int q = 0; q < Math.abs(k); q++) {
-            if (k < 0) {
-                a[q] = savedElements[a.length - k + q];
-            } else if (k > 0) {
-                a[q] = savedElements[q];;
+            for (int iLast = 0; iLast < Math.abs(k); iLast++) {
+                a[a.length + k] = savedElements[iLast];
             }
+
         }
 
     }
