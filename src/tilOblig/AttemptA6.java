@@ -3,63 +3,72 @@ package tilOblig;
 import java.util.Arrays;
 
 public class AttemptA6 {
-    public static void main(String[] args) {
-        char[] a = {'A', 'B', 'C', 'D', 'E'};
-
-        System.out.println(Arrays.toString(a));
-
-        rotasjon(a, 14);
-
-
-        System.out.println(Arrays.toString(a));
-
-        rotasjon(a, -2);
-
-        System.out.println(Arrays.toString(a));
-
-    }
 
     ///// Oppgave 4 //////////////////////////////////////
-    public static void delsortering(int[] a){
+    public static void delsortering(int[] a) {
 
-        // Fatima (s351947)
+        int n = a.length;
 
-
-        for (int i = 0; i < a.length; i++){
-
-            for (int j = i + 1; j < a.length; j++){
-
-                if (a[i] > a[j]){
-
-                    int temporary = a[i];
-                    a[i] = a[j];
-                    a[j] = temporary;
-
-                    int venstre = 0;
-                    int hoyre = a.length - 1;
-
-                    while (a[venstre] % 2 != 0) {
-
-                        venstre++;
-                    }
-
-                    while (a[hoyre] % 2 == 0) {
-
-                        hoyre--;
-                    }
-
-                    if (venstre < hoyre) {
-
-                        int temp = a[venstre];
-                        a[venstre] = a[hoyre];
-                        a[hoyre] = temp;
-                    }
-                }
-
-            }
-
+        if (n == 0) {
+            return;
         }
-        System.out.println(Arrays.toString(a));
+
+        int pLen = 0;
+        int oLen = 0;
+
+
+        for (int i = 0; i < n; i++) {
+            if (a[i] % 2 == 0) {
+                pLen += 1;
+            }
+            else{
+                oLen += 1;
+            }
+        }
+
+        int[] partall = new int[pLen];
+        int[] oddetall = new int[oLen];
+        int delingP = 0;
+        int delingO = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (a[i] % 2 == 0) {
+                partall[i - delingO] = a[i];
+                delingP += 1;
+            }
+            else{
+                oddetall[i - delingP] = a[i];
+                delingO += 1;
+            }
+        }
+
+        for (int i = 0; i < pLen - 1; i++) {
+            for (int j = pLen - 1; j > i; j--) {
+                if (partall[j] < partall[j - 1]) {
+                    int temp = partall[j];
+                    partall[j] = partall[j - 1];
+                    partall[j - 1] = temp;
+                }
+            }
+        }
+
+        for (int i = 0; i < oLen - 1; i++) {
+            for (int j = oLen - 1; j > i; j--) {
+                if (oddetall[j] < oddetall[j - 1]) {
+                    int temp = oddetall[j];
+                    oddetall[j] = oddetall[j - 1];
+                    oddetall[j - 1] = temp;
+                }
+            }
+        }
+
+        for (int i = 0; i < oLen; i++) {
+            a[i] = oddetall[i];
+        }
+
+        for (int i = 0; i < pLen; i++) {
+            a[i + oLen] = partall[i];
+        }
     }
 
     ///// Oppgave 5 //////////////////////////////////////
