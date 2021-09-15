@@ -7,7 +7,7 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AttemptATest {
+public class AttemptA6Test {
 
     ///// Oppgave 4 //////////////////////////////////////
     @org.junit.jupiter.api.Test
@@ -17,7 +17,7 @@ public class AttemptATest {
         int[] a = {};   // skal ikke kaste unntak her!
 
         try {
-            AttemptA.delsortering(a);  // kaller metoden
+            AttemptA6.delsortering(a);  // kaller metoden
         } catch (Exception ex) {
             System.out.println
                     ("Oppgave 4: a) Ikke unntak for en tom tabell!");
@@ -28,7 +28,7 @@ public class AttemptATest {
         int[] b = {5};
 
         try {
-            AttemptA.delsortering(a);  // kaller metoden
+            AttemptA6.delsortering(a);  // kaller metoden
         } catch (Exception ex) {
             System.out.println
                     ("Oppgave 4: b) Skal ikke kastes unntak her!");
@@ -45,7 +45,7 @@ public class AttemptATest {
         b = new int[]{4};
 
         try {
-            AttemptA.delsortering(a);  // kaller metoden
+            AttemptA6.delsortering(a);  // kaller metoden
         } catch (Exception ex) {
             System.out.println
                     ("Oppgave 4: d) Skal ikke kastes unntak her!");
@@ -62,7 +62,7 @@ public class AttemptATest {
         b = new int[]{2, 4, 6, 8, 10};
 
         try {
-            AttemptA.delsortering(a);  // kaller metoden
+            AttemptA6.delsortering(a);  // kaller metoden
         } catch (Exception ex) {
             System.out.println
                     ("Oppgave 4: f) Det går galt hvis det kun er partall!");
@@ -79,7 +79,7 @@ public class AttemptATest {
         b = new int[]{1, 3, 5, 7, 9};
 
         try {
-            AttemptA.delsortering(a);  // kaller metoden
+            AttemptA6.delsortering(a);  // kaller metoden
         } catch (Exception ex) {
             System.out.println
                     ("Oppgave 4: h) Det går galt hvis det kun er oddetall!");
@@ -98,7 +98,7 @@ public class AttemptATest {
 
         do {
             int[] c = a.clone();
-            AttemptA.delsortering(c);
+            AttemptA6.delsortering(c);
 
             if (!Arrays.equals(c, b)) {
                 System.out.println
@@ -117,7 +117,7 @@ public class AttemptATest {
         b = new int[]{-3, -1, 1, 3, -4, -2, 0, 2, 4};
 
         try {
-            AttemptA.delsortering(a);  // kaller metoden
+            AttemptA6.delsortering(a);  // kaller metoden
         } catch (Exception ex) {
             System.out.println
                     ("Oppgave 4: k) Skal ikke kastes unntak her!");
@@ -133,7 +133,7 @@ public class AttemptATest {
         if (antallFeil == 0) {
             a = randPerm(100000);
             long tid = System.currentTimeMillis();
-            AttemptA.delsortering(a);
+            AttemptA6.delsortering(a);
             tid = System.currentTimeMillis() - tid;
 
             for (int i = 0; i < 50000; i++) {
@@ -174,7 +174,7 @@ public class AttemptATest {
         char[] a = {};
 
         try {
-            AttemptA.rotasjon(a);  // kaller metoden
+            AttemptA6.rotasjon(a);  // kaller metoden
         } catch (Exception e) {
             System.out.println
                     ("Oppgave 5: a) Skal ikke kaste unntak for en tom tabell!!");
@@ -183,7 +183,7 @@ public class AttemptATest {
 
         char[] b = {'A'};
         char[] b0 = {'A'};
-        AttemptA.rotasjon(b);
+        AttemptA6.rotasjon(b);
         if (!Arrays.equals(b, b0)) {
             System.out.println("Oppgave 5: b) Feil hvis tabellen har ett element!");
             antallFeil++;
@@ -191,7 +191,7 @@ public class AttemptATest {
 
         char[] c = {'A', 'B'};
         char[] c0 = {'B', 'A'};
-        AttemptA.rotasjon(c);
+        AttemptA6.rotasjon(c);
         if (!Arrays.equals(c, c0)) {
             System.out.println("Oppgave 5: c) Feil hvis tabellen har to elementer!");
             antallFeil++;
@@ -200,7 +200,7 @@ public class AttemptATest {
         char[] d = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
         char[] d0 = {'J', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
 
-        AttemptA.rotasjon(d);
+        AttemptA6.rotasjon(d);
         if (!Arrays.equals(d, d0)) {
             System.out.println("Oppgave 5: d) Feil hvis tabellen har flere elementer!");
             antallFeil++;
@@ -217,7 +217,7 @@ public class AttemptATest {
         char[] a = {};
 
         try {
-            AttemptA.rotasjon(a, 1);  // kaller metoden
+            AttemptA6.rotasjon(a, 1);  // kaller metoden
         } catch (Exception e) {
             System.out.println(e);
             System.out.println
@@ -227,19 +227,19 @@ public class AttemptATest {
 
         char[] b = {'A'};
         char[] b0 = {'A'};
-        AttemptA.rotasjon(b, 0);
+        AttemptA6.rotasjon(b, 0);
         if (!Arrays.equals(b, b0)) {
             System.out.println("Oppgave 6: b) Feil hvis tabellen har ett element!");
             antallFeil++;
         }
 
-        AttemptA.rotasjon(b, 1);
+        AttemptA6.rotasjon(b, 1);
         if (!Arrays.equals(b, b0)) {
             System.out.println("Oppgave 6: c) Feil hvis tabellen har ett element!");
             antallFeil++;
         }
 
-        AttemptA.rotasjon(b, -1);
+        AttemptA6.rotasjon(b, -1);
         if (!Arrays.equals(b, b0)) {
             System.out.println("Oppgave 6: d) Feil hvis tabellen har ett element!");
             antallFeil++;
@@ -247,7 +247,7 @@ public class AttemptATest {
 
         char[] c = {'A', 'B'};
         char[] c0 = {'B', 'A'};
-        AttemptA.rotasjon(c, 1);
+        AttemptA6.rotasjon(c, 1);
 
         if (!Arrays.equals(c, c0)) {
             System.out.println("Oppgave 6: e) Feil hvis tabellen har to elementer!");
@@ -256,7 +256,7 @@ public class AttemptATest {
 
         c = new char[]{'A', 'B'};
 
-        AttemptA.rotasjon(c, -1);
+        AttemptA6.rotasjon(c, -1);
         if (!Arrays.equals(c, c0)) {
             System.out.println("Oppgave 6: f) Feil hvis tabellen har to elementer!");
             antallFeil++;
@@ -265,14 +265,14 @@ public class AttemptATest {
         char[] d = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
         char[] d0 = {'G', 'H', 'I', 'J', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-        AttemptA.rotasjon(d, 4);
+        AttemptA6.rotasjon(d, 4);
         if (!Arrays.equals(d, d0)) {
             System.out.println("Oppgave 6: g) Feil hvis tabellen har flere elementer!");
             antallFeil++;
         }
 
         d = new char[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
-        AttemptA.rotasjon(d, -6);
+        AttemptA6.rotasjon(d, -6);
         if (!Arrays.equals(d, d0)) {
             System.out.println("Oppgave 6: h) Feil hvis tabellen har flere elementer!");
             antallFeil++;
@@ -280,7 +280,7 @@ public class AttemptATest {
 
         char[] x = new char[100_000];
         long tid = System.currentTimeMillis();
-        AttemptA.rotasjon(x, 99_999);
+        AttemptA6.rotasjon(x, 99_999);
         tid = System.currentTimeMillis() - tid;
 
         if (tid > 20) {
@@ -290,7 +290,7 @@ public class AttemptATest {
         }
 
         tid = System.currentTimeMillis();
-        AttemptA.rotasjon(x, 199_999);
+        AttemptA6.rotasjon(x, 199_999);
         tid = System.currentTimeMillis() - tid;
 
         if (tid > 20) {
@@ -300,7 +300,7 @@ public class AttemptATest {
         }
 
         tid = System.currentTimeMillis();
-        AttemptA.rotasjon(x, 50_000);
+        AttemptA6.rotasjon(x, 50_000);
         tid = System.currentTimeMillis() - tid;
 
         if (tid > 20) {
@@ -310,7 +310,7 @@ public class AttemptATest {
         }
 
         tid = System.currentTimeMillis();
-        AttemptA.rotasjon(x, -40_000);
+        AttemptA6.rotasjon(x, -40_000);
         tid = System.currentTimeMillis() - tid;
 
         if (tid > 20) {
