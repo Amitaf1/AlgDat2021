@@ -122,25 +122,33 @@ public class AttemptA6 {
     ///// Oppgave 6 //////////////////////////////////////
     public static void rotasjon(char[] a, int k) {
 
-        // Fatima (s351947)
+        // Et variabel som skal passe på at bokstavene skal ikke rotere for mange ganger
+        int iteratekControl = Math.abs(k);
 
-        if (a.length <= k || a.length <= -k) {
+        int n = a.length;
+
+        if (n <= 1 && n >= -1) {
             return;
         }
 
-        char[] savedElements = new char[5];
+        while (iteratekControl > n - 1) {
+            if (k > n - 1) {
+                k -= n;
+            } else if (k < -1 * (n - 1)) {
+                k += n;
+            }
 
-        for (int i = 0; i < Math.abs(k); i++) {
-            if (k > 0) {
-                savedElements[i] = a[a.length - k + i];
-            }
-            else if (k < 0) {
-                savedElements[i] = a[i];
-            }
+            iteratekControl -= Math.abs(n);
         }
 
+        char[] savedElements = new char[Math.abs(k)];
+
         if (k > 0) {
-            for (int iFirst = a.length - 1; iFirst >= k; iFirst--) {
+            for (int iSave = k; iSave > 0; iSave--) {
+                savedElements[k - iSave] = a[n - iSave];
+            }
+
+            for (int iFirst = n - 1; iFirst >= k; iFirst--) {
                 a[iFirst] = a[iFirst - k];
             }
 
@@ -148,20 +156,23 @@ public class AttemptA6 {
                 a[iLast] = savedElements[iLast];
             }
 
-
         }
 
-
         if (k < 0) {
-            for (int iFirst = 0; iFirst < a.length + k; iFirst++) {
+            for (int iSave = 0; iSave < Math.abs(k); iSave++) {
+                savedElements[iSave] = a[iSave];
+            }
+
+            for (int iFirst = 0; iFirst < n + k; iFirst++) {
                 a[iFirst] = a[iFirst - k];
             }
 
             for (int iLast = 0; iLast < Math.abs(k); iLast++) {
-                a[a.length + iLast + k] = savedElements[iLast];
+                a[n + iLast + k] = savedElements[iLast];
             }
 
         }
 
     }
+
 }
