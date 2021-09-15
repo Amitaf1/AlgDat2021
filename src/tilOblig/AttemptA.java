@@ -10,7 +10,7 @@ public class AttemptA {
 
         System.out.println(Arrays.toString(a));
 
-        rotasjon(a, -901, iterate);
+        rotasjon(a, -21, iterate);
 
         iterate += 1;
 
@@ -24,6 +24,7 @@ public class AttemptA {
 
     public static void rotasjon(char[] a, int k, int iterate) {
 
+        // Et variabel som skal passe på at bokstavene skal ikke rotere for mange ganger
         int iteratekControl = Math.abs(k);
 
         if (a.length <= 1 && a.length >= -1) {
@@ -43,8 +44,6 @@ public class AttemptA {
 
 
         char[] savedElements = new char[Math.abs(k)];
-
-        String aDebug = Arrays.toString(a);
 
 
         if (k > 0) {
@@ -71,7 +70,6 @@ public class AttemptA {
 
             for (int iFirst = 0; iFirst < a.length + k; iFirst++) {
                 a[iFirst] = a[iFirst - k];
-                aDebug = Arrays.toString(a);
             }
 
             for (int iLast = 0; iLast < Math.abs(k); iLast++) {
