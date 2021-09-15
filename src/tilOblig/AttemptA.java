@@ -6,23 +6,19 @@ public class AttemptA {
     public static void main(String[] args) {
         char[] a = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
 
-        int iterate = 1;
+        System.out.println(Arrays.toString(a));
+
+        rotasjon(a, -21);
 
         System.out.println(Arrays.toString(a));
 
-        rotasjon(a, -21, iterate);
-
-        iterate += 1;
-
-        System.out.println(Arrays.toString(a));
-
-        rotasjon(a, 5, iterate);
+        rotasjon(a, 5);
 
         System.out.println(Arrays.toString(a));
 
     }
 
-    public static void rotasjon(char[] a, int k, int iterate) {
+    public static void rotasjon(char[] a, int k) {
 
         // Et variabel som skal passe på at bokstavene skal ikke rotere for mange ganger
         int iteratekControl = Math.abs(k);
