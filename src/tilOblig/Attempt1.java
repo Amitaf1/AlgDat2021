@@ -4,14 +4,14 @@ import java.util.Arrays;
 
 public class Attempt1 {
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
 
         int[] a = {6, 10, 9, 4, 1, 3, 8, 5, 2, 7};
 
         delsortering(a);
 
         System.out.println(Arrays.toString(a));
-    }*/
+    }
 
     public static void delsortering(int[] a) {
 
@@ -25,11 +25,10 @@ public class Attempt1 {
         int oLen = 0;
 
 
-        for (int i = 0; i < n; i++) {
-            if (a[i] % 2 == 0) {
+        for (int i : a) {
+            if (i % 2 == 0) {
                 pLen += 1;
-            }
-            else{
+            } else {
                 oLen += 1;
             }
         }
@@ -50,25 +49,15 @@ public class Attempt1 {
             }
         }
 
-        for (int i = 0; i < pLen - 1; i++) {
-            for (int j = pLen - 1; j > i; j--) {
-                if (partall[j] < partall[j - 1]) {
-                    int temp = partall[j];
-                    partall[j] = partall[j - 1];
-                    partall[j - 1] = temp;
-                }
-            }
-        }
+        int oLav = 0;
+        int oHøy = oLen - 1;
+        int pLav = 0;
+        int pHøy = pLen - 1;
 
-        for (int i = 0; i < oLen - 1; i++) {
-            for (int j = oLen - 1; j > i; j--) {
-                if (oddetall[j] < oddetall[j - 1]) {
-                    int temp = oddetall[j];
-                    oddetall[j] = oddetall[j - 1];
-                    oddetall[j - 1] = temp;
-                }
-            }
-        }
+
+        quickSort(oddetall, oLav, oHøy);
+        quickSort(partall, pLav, pHøy);
+
 
         for (int i = 0; i < oLen; i++) {
             a[i] = oddetall[i];
@@ -78,4 +67,34 @@ public class Attempt1 {
             a[i + oLen] = partall[i];
         }
     }
+
+    public static int partisjon(int[] a, int lav, int høy) {
+        int mellom = a[høy];
+        int i = lav - 1;
+
+        for (int j = lav; j <= høy; j++) {
+            if (a[j] < mellom) {
+                i++;
+                int temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+
+        int temp = a[i + 1];
+        a[i + 1] = a[høy];
+        a[høy] = temp;
+
+        return (i + 1);
+    }
+
+    public static void quickSort(int[] array, int lav, int høy) {
+        if (lav < høy) {
+            int mellom = partisjon(array, lav, høy);
+
+            quickSort(array, lav, mellom - 1);
+            quickSort(array, mellom + 1, høy);
+        }
+    }
+
 }
