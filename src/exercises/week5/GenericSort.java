@@ -1,6 +1,5 @@
-package week5;
+package exercises.week5;
 
-import java.net.PortUnreachableException;
 import java.util.Arrays;
 
 public class GenericSort {
