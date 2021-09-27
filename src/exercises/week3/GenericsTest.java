@@ -1,4 +1,4 @@
-package exercises.week4;
+package exercises.week3;
 
 public class GenericsTest {
 

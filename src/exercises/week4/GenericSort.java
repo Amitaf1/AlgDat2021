@@ -1,4 +1,4 @@
-package exercises.week5;
+package exercises.week4;
 
 import java.util.Arrays;
 
