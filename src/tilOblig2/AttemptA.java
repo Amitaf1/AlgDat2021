@@ -5,19 +5,11 @@ import java.util.Iterator;
 
 public class AttemptA <T> implements Liste<T> {
 
-    public static void main(String[] args) {
-        Liste<String> liste = new AttemptA<>();
-
-
-        System.out.println(liste.antall() + " " + liste.tom());
-    }
-
     /**
      * Node class
      *
      * @param <T>
      */
-
     private static final class Node<T> {
         private T verdi;                   // nodens verdi
         private Node<T> forrige, neste;    // pekere
@@ -40,9 +32,7 @@ public class AttemptA <T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public AttemptA() {
-        this.hode = hode;
-        this.hale = hale;
-        this.antall = antall();
+        throw new UnsupportedOperationException();
     }
 
     public AttemptA(T[] a) {
@@ -55,24 +45,12 @@ public class AttemptA <T> implements Liste<T> {
 
     @Override
     public int antall() {
-
-        AttemptAIterator it = denne.AttemptAIterator();
-
-        while (it.hasNext()){
-
-        }
-
-        return antall;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean tom() {
-        if (){
-            return True
-        }
-        else {
-            return False;
-        }
+        throw new UnsupportedOperationException();
     }
 
     @Override

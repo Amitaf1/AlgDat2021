@@ -1,9 +1,29 @@
 package tilOblig2;
 
-import java.util.Comparator;
-import java.util.Iterator;
+
+import java.util.*;
 
 public class DobbeltLenketListe <T> implements Liste<T> {
+
+    /*
+        LinkedList<Integer> a = new LinkedList<>();
+
+        Integer[] b = {1, 12, 96, 5, 32};
+
+        List<Integer> c = Arrays.asList(b);
+
+        a.addAll(c);
+
+        System.out.println(a);
+        System.out.println(a.size());
+     */
+
+    public void main(String[] args) {
+        Liste<String> liste = new DobbeltLenketListe<>();
+
+
+        System.out.println(liste.antall() + " " + liste.tom());
+    }
 
     /**
      * Node class
@@ -25,6 +45,51 @@ public class DobbeltLenketListe <T> implements Liste<T> {
         }
     }
 
+    /*
+    static Node getNode() {
+        return new Node(null);
+    }
+     */
+
+    Node lagListe(T[] a, Node hode) {
+        int n = a.length;
+
+        // Declare newNode and temporary pointer
+        Node temp;
+
+        // Iterate the loop until array length
+        for(int i = 0; i < n; i++) {
+            // Create new node
+            Node newNode = new Node(a[i]);
+
+            // Assign the array data
+            //newNode.verdi = a[i];
+
+            // If it is first element
+            // Put that node prev and next as start
+            // as it is circular
+            if (i == 0) {
+                hode = newNode;
+                newNode.forrige = hode;
+                newNode.neste = hode;
+            }
+            else {
+                // Find the last node
+                temp = (hode).forrige;
+
+                // Add the last node to make them
+                // in circular fashion
+                temp.neste = newNode;
+                newNode.neste = hode;
+                newNode.forrige = temp;
+                temp = hode;
+                temp.forrige = newNode;
+            }
+        }
+        return hode;
+
+    }
+
     // instansvariabler
     private Node<T> hode;          // peker til den første i listen
     private Node<T> hale;          // peker til den siste i listen
@@ -32,11 +97,18 @@ public class DobbeltLenketListe <T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
-        throw new UnsupportedOperationException();
+        Node hode = null;
+        Node hale = null;
     }
 
     public DobbeltLenketListe(T[] a) {
-        throw new UnsupportedOperationException();
+        Objects.requireNonNull(a, "Tabellen a er null");
+
+        hode = lagListe(a, hode);
+
+        this.antall = a.length;
+        this.endringer = 0;
+
     }
 
     public Liste<T> subliste(int fra, int til) {
@@ -45,12 +117,17 @@ public class DobbeltLenketListe <T> implements Liste<T> {
 
     @Override
     public int antall() {
-        throw new UnsupportedOperationException();
+        return antall;
     }
 
     @Override
     public boolean tom() {
-        throw new UnsupportedOperationException();
+        if (antall == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override
@@ -138,7 +215,15 @@ public class DobbeltLenketListe <T> implements Liste<T> {
 
         @Override
         public T next() {
+            /*
+            if (this.hasNext() == true) {
+                T next = this.neste;
+                return next;
+            }
+             */
+
             throw new UnsupportedOperationException();
+
         }
 
         @Override
