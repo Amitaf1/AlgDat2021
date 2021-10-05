@@ -7,19 +7,40 @@ import java.io.*;
 public class DobbeltLenketListe <T> implements Liste<T> {
 
     public static void main(String[] args) {
-        Character[] c = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+        DobbeltLenketListe<String> liste = new DobbeltLenketListe<>();
 
-        DobbeltLenketListe<Character> liste = new DobbeltLenketListe<>(c);
+        liste = new DobbeltLenketListe<>(new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I"});
 
-        System.out.println(liste.subliste(3,8)); // [D,E, F, G, H]
+        System.out.println(liste.toString());
 
-        System.out.println(liste.subliste(5,5)); // []
+        liste.fjern("A");
+        System.out.println(liste.toString());
 
-        System.out.println(liste.subliste(8,liste.antall())); // [I, J]
+        liste.fjern("B");
+        System.out.println(liste.toString());
 
-        // System.out.println(liste.subliste(0,11));
-        // skal kaste unntak
-        }
+        liste.fjern("D");
+        System.out.println(liste.toString());
+
+        liste.fjern("F");
+        System.out.println(liste.toString());
+
+        liste.fjern("G");
+        System.out.println(liste.toString());
+
+        liste.fjern("I");
+        System.out.println(liste.toString());
+
+        liste.fjern("C");
+        System.out.println(liste.toString());
+
+        liste.fjern("E");
+        System.out.println(liste.toString());
+
+        liste.fjern("H");
+        System.out.println(liste.toString());
+
+    }
 
     /**
      * Node class
@@ -67,7 +88,6 @@ public class DobbeltLenketListe <T> implements Liste<T> {
     private Node<T> hode;          // peker til den første i listen
     private Node<T> hale;          // peker til den siste i listen
     private int antall;            // antall ikke-null elementer i listen
-    private int total;             // antall elementer i listen
     private int endringer;         // antall endringer i listen
     private boolean tom;           // om listen er tom eller ikke
 
@@ -80,49 +100,48 @@ public class DobbeltLenketListe <T> implements Liste<T> {
     }
 
     public DobbeltLenketListe(T[] a) {
-        this.total = a.length;
-
         Objects.requireNonNull(a, "Tabellen a er null");
 
-        if (this.total > 0) {
-            // lag en midlertidig beholder
-            Node<T> temp;
+        if (a.length == 0) { return; }
 
-            // passer på at den første noden er ikke null og at den første noden kodes annerledes enn de andre
-            int nonNullNode = 0;
+        // lag en midlertidig beholder
+        Node<T> temp;
 
-            // Iterate the loop until array length
-            for (T i : a) {
+        // passer på at den første noden er ikke null og at den første noden kodes annerledes enn de andre
+        int nonNullNode = 0;
 
-                // ignorer null verdier
-                if (i == null) { continue; }
+        Node<T> nyNode;
 
-                // lag den første noden
-                if (nonNullNode == 0) {
-                    // lag en ny node med verdien a[i]
-                    Node<T> nyNode = new Node<T>(i);
+        for (T i : a) {
 
-                    this.hode = nyNode;
-                    this.hale = nyNode;
-                    this.hode.forrige = null;
-                    this.hale.neste = null;
-                    this.antall++;
-                    this.endringer++;
-                    nonNullNode++;
-                    continue;
-                }
+            // ignorer null verdier
+            if (i == null) { continue; }
 
-                // finn den siste noden
-                temp = this.hale;
+            // lag den første noden
+            if (nonNullNode == 0) {
+                // lag en ny node med verdien a[i]
+                nyNode = new Node<>(i);
 
-                // lenker nodene sammen
-                Node<T> nyNode = new Node<T>(i, temp, null);
-                temp.neste = nyNode;
+                this.hode = nyNode;
                 this.hale = nyNode;
+                this.hode.forrige = null;
+                this.hale.neste = null;
                 this.antall++;
                 this.endringer++;
+                this.tom = false;
+                nonNullNode++;
+                continue;
             }
 
+            // finn den siste noden
+            temp = this.hale;
+
+            // lenker nodene sammen
+            nyNode = new Node<>(i, temp, null);
+            temp.neste = nyNode;
+            this.hale = nyNode;
+            this.antall++;
+            this.endringer++;
         }
 
     }
@@ -132,9 +151,7 @@ public class DobbeltLenketListe <T> implements Liste<T> {
 
         Liste<T> subliste = new DobbeltLenketListe<>();
 
-        for (int i = fra; i < til; i++) {
-            subliste.leggInn(this.hent(i));
-        }
+        for (int i = fra; i < til; i++) { subliste.leggInn(this.finnNode(i).verdi); }
 
         return subliste;
     }
@@ -166,10 +183,7 @@ public class DobbeltLenketListe <T> implements Liste<T> {
     public int antall() { return this.antall; }
 
     @Override
-    public boolean tom() {
-        if (this.antall != 0) { this.tom = false; }
-        return this.tom;
-    }
+    public boolean tom() { return this.tom; }
 
     @Override
     public boolean leggInn(T verdi) {
@@ -177,13 +191,16 @@ public class DobbeltLenketListe <T> implements Liste<T> {
         Objects.requireNonNull(verdi, "Verdien er null");
 
         if (this.antall == 0) {
-            this.tom = false;
 
             // lag en ny node med verdien verdi
-            Node<T> nyNode = new Node<T>(verdi);
+            Node<T> nyNode = new Node<>(verdi);
 
             this.hode = nyNode;
             this.hale = nyNode;
+            this.hode.forrige = null;
+            this.hale.neste = null;
+            this.tom = false;
+
         }
         else {
             // lag en midlertidig beholder
@@ -193,13 +210,12 @@ public class DobbeltLenketListe <T> implements Liste<T> {
             temp = this.hale;
 
             // lenker nodene sammen
-            Node<T> nyNode = new Node<T>(verdi, temp, null);
+            Node<T> nyNode = new Node<>(verdi, temp, null);
             temp.neste = nyNode;
             this.hale = nyNode;
         }
 
         this.antall++;
-        this.total++;
         this.endringer++;
 
         return true;
@@ -207,12 +223,76 @@ public class DobbeltLenketListe <T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
-        throw new UnsupportedOperationException();
+
+        Objects.requireNonNull(verdi, "Verdien er null");
+
+        indeksKontroll(indeks, true);
+
+        if (this.antall == 0) {
+
+            // lag en ny node med verdien verdi
+            Node<T> nyNode = new Node<>(verdi);
+
+            this.hode = nyNode;
+            this.hale = nyNode;
+            this.hode.forrige = null;
+            this.hale.neste = null;
+            this.tom = false;
+
+        }
+        else if (indeks == 0) {
+            // lag en midlertidig beholder
+            Node<T> temp;
+
+            // finn den siste noden
+            temp = this.hode;
+
+            // lenker nodene sammen
+            Node<T> nyNode = new Node<>(verdi, null, temp);
+            temp.forrige = nyNode;
+            this.hode = nyNode;
+        }
+        else if (indeks == this.antall) {
+            // lag en midlertidig beholder
+            Node<T> temp;
+
+            // finn den siste noden
+            temp = this.hale;
+
+            // lenker nodene sammen
+            Node<T> nyNode = new Node<>(verdi, temp, null);
+            temp.neste = nyNode;
+            this.hale = nyNode;
+        }
+        else {
+            // lag en midlertidig beholder
+            Node<T> temp, temp2;
+
+            // finn den siste noden
+            temp = this.finnNode(indeks - 1);
+            temp2 = this.finnNode(indeks);
+
+            // lenker nodene sammen
+            Node<T> nyNode = new Node<>(verdi, temp, temp2);
+            temp.neste = nyNode;
+            temp2.forrige = nyNode;
+        }
+
+        this.antall++;
+        this.endringer++;
+
     }
 
     @Override
     public boolean inneholder(T verdi) {
-        throw new UnsupportedOperationException();
+
+        if (verdi != null) {
+            for (int i = 0; i < this.antall; i++) {
+                if (this.finnNode(i).verdi.equals(verdi)) { return true; }
+            }
+        }
+
+        return false;
     }
 
     @Override
@@ -224,7 +304,14 @@ public class DobbeltLenketListe <T> implements Liste<T> {
 
     @Override
     public int indeksTil(T verdi) {
-        throw new UnsupportedOperationException();
+
+        if (verdi != null) {
+            for (int i = 0; i < this.antall; i++) {
+                if (this.finnNode(i).verdi.equals(verdi)) { return i; }
+            }
+        }
+
+        return -1;
     }
 
     @Override
@@ -250,17 +337,158 @@ public class DobbeltLenketListe <T> implements Liste<T> {
 
     @Override
     public boolean fjern(T verdi) {
-        throw new UnsupportedOperationException();
+
+        int indeks = -1;
+
+        if (verdi != null) {
+            for (int i = 0; i < this.antall; i++) {
+                if (this.finnNode(i).verdi.equals(verdi)) {
+                    indeks = i;
+                    break;
+                }
+            }
+        }
+
+        if (indeks == -1) { return false; }
+
+        Node<T> gammelverdi = this.finnNode(indeks);
+
+        if (indeks == 0 && this.antall == 1) {
+            this.hode = null;
+            this.hale = null;
+
+            this.tom = true;
+            this.antall = 0;
+            this.endringer++;
+
+            return true;
+        }
+        else if (indeks == 0) {
+            // lag en midlertidig beholder
+            Node<T> temp;
+
+            // finn den andre noden
+            temp = this.hode.neste;
+
+            // lenker nodene sammen
+            temp.forrige = null;
+            this.hode = temp;
+        }
+        else if (indeks == this.antall - 1) {
+            // lag en midlertidig beholder
+            Node<T> temp;
+
+            // finn den nest siste noden
+            temp = this.hale.forrige;
+
+            // lenker nodene sammen
+            temp.neste = null;
+            this.hale = temp;
+        }
+        else {
+            // lag en midlertidig beholder
+            Node<T> temp, temp2;
+
+            temp = this.finnNode(indeks - 1);
+            temp2 = this.finnNode(indeks + 1);
+
+            // lenker nodene sammen
+            temp.neste = temp2;
+            temp2.forrige = temp;
+        }
+
+        this.antall--;
+        this.endringer++;
+
+        /*
+        if (this.antall == 0) {
+            this.hode = null;
+            this.hale = null;
+            this.tom = true;
+        }
+        */
+
+        gammelverdi.forrige = null;
+        gammelverdi.neste = null;
+
+        return true;
     }
 
     @Override
     public T fjern(int indeks) {
-        throw new UnsupportedOperationException();
+        indeksKontroll(indeks, false);
+
+        Node<T> gammelverdi = this.finnNode(indeks);
+
+        if (indeks == 0 && this.antall == 1) {
+            this.hode = null;
+            this.hale = null;
+
+            this.tom = true;
+            this.antall = 0;
+            this.endringer++;
+
+            return gammelverdi.verdi;
+        }
+        else if (indeks == 0) {
+            // lag en midlertidig beholder
+            Node<T> temp;
+
+            // finn den andre noden
+            temp = this.hode.neste;
+
+            // lenker nodene sammen
+            temp.forrige = null;
+            this.hode = temp;
+        }
+        else if (indeks == this.antall - 1) {
+            // lag en midlertidig beholder
+            Node<T> temp;
+
+            // finn den nest siste noden
+            temp = this.hale.forrige;
+
+            // lenker nodene sammen
+            temp.neste = null;
+            this.hale = temp;
+        }
+        else {
+            // lag en midlertidig beholder
+            Node<T> temp, temp2;
+
+            temp = this.finnNode(indeks - 1);
+            temp2 = this.finnNode(indeks + 1);
+
+            // lenker nodene sammen
+            temp.neste = temp2;
+            temp2.forrige = temp;
+        }
+
+        this.antall--;
+        this.endringer++;
+
+        /*
+        if (this.antall == 0) {
+            this.hode = null;
+            this.hale = null;
+            this.tom = true;
+        }
+        */
+
+        gammelverdi.forrige = null;
+        gammelverdi.neste = null;
+
+        return gammelverdi.verdi;
     }
 
     @Override
     public void nullstill() {
-        throw new UnsupportedOperationException();
+        this.hode = null;
+        this.hale = null;
+
+        this.tom = true;
+        this.antall = 0;
+        this.endringer++;
     }
 
     @Override
@@ -331,15 +559,7 @@ public class DobbeltLenketListe <T> implements Liste<T> {
 
         @Override
         public T next() {
-            /*
-            if (this.hasNext() == true) {
-                T next = this.neste;
-                return next;
-            }
-             */
-
             throw new UnsupportedOperationException();
-
         }
 
         @Override
