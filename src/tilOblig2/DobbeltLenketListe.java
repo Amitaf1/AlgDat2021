@@ -1,8 +1,6 @@
 package tilOblig2;
 
-import static java.util.Objects.requireNonNull;
 import java.util.*;
-import java.io.*;
 
 public class DobbeltLenketListe <T> implements Liste<T> {
 
@@ -89,14 +87,12 @@ public class DobbeltLenketListe <T> implements Liste<T> {
     private Node<T> hale;          // peker til den siste i listen
     private int antall;            // antall ikke-null elementer i listen
     private int endringer;         // antall endringer i listen
-    private boolean tom;           // om listen er tom eller ikke
 
     public DobbeltLenketListe() {
         this.hode = null;
         this.hale = null;
         this.antall = 0;
         this.endringer = 0;
-        this.tom = true;
     }
 
     public DobbeltLenketListe(T[] a) {
@@ -128,7 +124,6 @@ public class DobbeltLenketListe <T> implements Liste<T> {
                 this.hale.neste = null;
                 this.antall++;
                 this.endringer++;
-                this.tom = false;
                 nonNullNode++;
                 continue;
             }
@@ -183,7 +178,7 @@ public class DobbeltLenketListe <T> implements Liste<T> {
     public int antall() { return this.antall; }
 
     @Override
-    public boolean tom() { return this.tom; }
+    public boolean tom() { return this.antall == 0; }
 
     @Override
     public boolean leggInn(T verdi) {
@@ -199,7 +194,6 @@ public class DobbeltLenketListe <T> implements Liste<T> {
             this.hale = nyNode;
             this.hode.forrige = null;
             this.hale.neste = null;
-            this.tom = false;
 
         }
         else {
@@ -237,7 +231,6 @@ public class DobbeltLenketListe <T> implements Liste<T> {
             this.hale = nyNode;
             this.hode.forrige = null;
             this.hale.neste = null;
-            this.tom = false;
 
         }
         else if (indeks == 0) {
@@ -357,7 +350,6 @@ public class DobbeltLenketListe <T> implements Liste<T> {
             this.hode = null;
             this.hale = null;
 
-            this.tom = true;
             this.antall = 0;
             this.endringer++;
 
@@ -404,7 +396,6 @@ public class DobbeltLenketListe <T> implements Liste<T> {
         if (this.antall == 0) {
             this.hode = null;
             this.hale = null;
-            this.tom = true;
         }
         */
 
@@ -420,11 +411,11 @@ public class DobbeltLenketListe <T> implements Liste<T> {
 
         Node<T> gammelverdi = this.finnNode(indeks);
 
+        // denne delen av koden sletter noder på forskjellige måter basert på indeksen og lengden av den lenkede listen
         if (indeks == 0 && this.antall == 1) {
             this.hode = null;
             this.hale = null;
 
-            this.tom = true;
             this.antall = 0;
             this.endringer++;
 
@@ -471,7 +462,6 @@ public class DobbeltLenketListe <T> implements Liste<T> {
         if (this.antall == 0) {
             this.hode = null;
             this.hale = null;
-            this.tom = true;
         }
         */
 
@@ -483,12 +473,7 @@ public class DobbeltLenketListe <T> implements Liste<T> {
 
     @Override
     public void nullstill() {
-        this.hode = null;
-        this.hale = null;
-
-        this.tom = true;
-        this.antall = 0;
-        this.endringer++;
+        while (this.antall != 0) { this.fjern(0); }
     }
 
     @Override
