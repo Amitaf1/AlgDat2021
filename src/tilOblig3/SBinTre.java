@@ -395,3 +395,69 @@ public class SBinTre<T> {
 
 
 } // ObligSBinTre
+
+
+/*
+Oppgave 1:
+I denne oppgaven lagde jeg en metode som lager et nytt node med et spesifisert verdi inn i søketreet.
+Metoden sammenligner verdien som skal legges inn med de andre verdiene i søketreet
+for å bestemme om noden som legges inn  skal være et høyrebarn eller et venstrebarn. Så legges noden inn i treet.
+
+For å gjøre dette kopierte jeg koden programkode 5.2.3 a) og endret noen deler av den.
+*/
+
+/*
+Oppgave 2:
+I denne oppgaven lagde jeg en metode som sjekker hvor mange ganger et verdi kommer opp i søketree.
+Metoden bruker en stack for å gå gjennom alle verdier av søketreet.
+Comparator brukes da for å sammenligne verdiene med parameteren verdi.
+
+Jeg fikk hjelp av videoen om dybde først-traversering og endret noen deler av koden for at metoden skulle fungere.
+*/
+
+/*
+Oppgave 3:
+I denne oppgave lagde jeg to metoder.
+Den første sjekker hva den første noden i postorden ville ha vært om parameternoden var roten.
+Den bruker en while(true)-løkke for å gå gjennom alle noder helt til den første i postorden finnes.
+
+Den andre sjekker hvilket node som kommer etter parameternoden i postorden.
+Den sjekker først om parametern er roten, så sjekkes det om parameteren er venstre eller høyrebarnet til forelderen sin.
+
+For å gjøre dette så jeg på seksjon 5.1.7 og kodet etter hvilke krav som måtte oppfølges.
+*/
+
+/*
+Oppgave 4:
+I denne oppgaven lagde jeg to metoder.
+Den første utfører en spesifisert oppgave som er kodet ved bruk av en while-løkke.
+While-løkken fortsetter helt til oppgaven er utført med hver node sin verdi, og hjelpenoden p er ute av treet.
+
+Den andre utfører en spesifisert oppgave som er kodet ved rekursjon.
+Den rekursive kallen fortsetter til p er ute av treet og roten har blitt lagt til.
+
+Hinten i oppgaven hjelp meg på veien til å kode den første metoden, og videoen om dybde først-traversering på den andre.
+*/
+
+/*
+Oppgave 5:
+I denne oppgaven lagde jeg to metoder.
+Den første gjør det binære søketreet om til en ArrayList. Verdiene blir lagt til i nivåorden.
+Den bruker en kø til å traversere treet i nivå orden.
+
+Den første gjør ArrayListom om til et binær søketre. Verdiene blir lagt til i nivåorden.
+
+Jeg fikk hjelp av videoen om bredde først-traversering for å lage den første metoden,
+mens den andre metoden var mye lettere, og jeg kunne gjøre det selv.
+*/
+
+/*
+Oppgave 6:
+I denne oppgaven lagde jeg tre metoder.
+Den første sletter den første noden i søketreet med den spesifiserte verdien.
+Jeg kopierte programkode 5.2.8 d) og endret lit på koden for å få det til.
+
+Den andre sletter alle noder i søketreet med den spesifiserte verdien. Jeg brukte en for-løkke for å slette alle nodene.
+
+Den tredje sletter alle noden i søketreet. Jeg brukte en for-løøe for å slette alle nodene.
+*/
